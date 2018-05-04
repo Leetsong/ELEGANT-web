@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "babel-register": "^6.26.0"
+  },
+  "dependencies": {
+    "java": "^0.9.1",
+    "koa": "^2.5.0"
+  }
+}
