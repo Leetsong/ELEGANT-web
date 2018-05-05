@@ -2,22 +2,32 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const project = require('./project.config.js');
+
 // plugins
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  title: 'ELEGANT',
-  filename: 'index.html',
-  template: './index.html'
+  title: project.app.name,
+  filename: project.distHtml,
+  template: project.srcHtml
 });
 const cleanWebpackPlugin = new CleanWebpackPlugin(['dist']);
 
 module.exports = {
-  entry: './src/index.js',
+  entry: project.entry,
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: project.dist,
+    path: project.distDir
   },
   resolve: {
-    extensions: [ '.js', '.jsx', 'es6' ]
+    extensions: [ '.js', '.jsx', 'es6' ],
+    alias: {
+      root: project.rootDir,
+      assets: project.assetsDir,
+      src: project.srcDir,
+      layout: path.resolve(project.srcDir, 'layout'),
+      models: path.resolve(project.srcDir, 'models'),
+      routers: path.resolve(project.srcDir, 'routers')
+    }
   },
   module: {
     rules: [
@@ -48,7 +58,7 @@ module.exports = {
                   'import', {
                     'libraryName': 'antd', 
                     'libraryDirectory': 'es', 
-                    'style': 'css'
+                    'style': true
                   }
                 ]
               ]

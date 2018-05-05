@@ -1,4 +1,6 @@
 {
+  "private": true,
+  "theme": {},
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --config webpack.dev.js",
     "build": "./node_modules/.bin/webpack --config webpack.prod.js"
@@ -33,6 +35,8 @@
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
+    "less-vars-to-js": "^1.2.1",
+    "react-router-dom": "^4.2.2",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "url-loader": "^1.0.1",

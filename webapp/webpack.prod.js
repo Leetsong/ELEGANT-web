@@ -2,11 +2,13 @@ const merge = require('webpack-merge');
 const DefinePlugin = require('webpack').DefinePlugin;
 const ExtractTextWepbackPlugin = require('extract-text-webpack-plugin');
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
+
 const common = require('./webpack.common.js');
+const project = require('./project.config.js');
 
 // plugins
-const antdExtractTextWebpackPlugin = new ExtractTextWepbackPlugin('antd.css');
-const stylesExtractTextWebpackPlugin = new ExtractTextWepbackPlugin('styles.css');
+const antdExtractTextWebpackPlugin = new ExtractTextWepbackPlugin(project.distCssAntd);
+const stylesExtractTextWebpackPlugin = new ExtractTextWepbackPlugin(project.distCssOthers);
 const definePlugin = new DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify('production')
 });
@@ -43,11 +45,21 @@ module.exports = merge(common, {
         })
       },
       { // disable css module for node_modules (especially antd)
-        test: /\.(css)$/,
+        test: /\.less$/,
         include: /node_modules/,
         use: antdExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader'
+          use: [
+            'css-loader',
+            {
+              loader: "less-loader",
+              options: {
+                // set javascriptEnabled when using less@3.x
+                javascriptEnabled: true,
+                modifyVars: project.theme
+              }
+            }
+          ]
         })
       }
     ],

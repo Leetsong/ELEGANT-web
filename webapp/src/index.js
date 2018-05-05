@@ -1,10 +1,12 @@
 import dva from 'dva';
+
 import router from './router';
+import menu from './models/menu';
 
 const app = dva();
 
 // models
-// app.model();
+app.model(menu);
 
 // router
 app.router(router);

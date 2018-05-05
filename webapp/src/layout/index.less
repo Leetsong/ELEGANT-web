@@ -1,0 +1,32 @@
+@import "~root/theme";
+
+@content-hpadding: 20%;
+
+.layout {
+  background: white;
+}
+
+.logo {
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+
+.header {
+  padding: 0 @content-hpadding;
+  width: 100%;
+  box-sizing: content-box;
+  border-bottom: 1px solid @primary-color;
+  position: fixed;
+  z-index: 9999999;
+  left: 0;
+  top: 0;
+}
+
+.content {
+  padding: 100px @content-hpadding;
+  min-height: 1000px;
+}
+
+.footer {
+  text-align: center;
+}

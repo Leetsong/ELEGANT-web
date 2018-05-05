@@ -1,22 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Router, Route } from 'dva/router';
+import { Router } from 'react-router-dom';
 
 import Layout from './layout';
-import Home from './routers/home';
+import ELEGANT from './routers/elegant';
+import Download from './routers/download';
+import Docs from './routers/docs';
+import Stats from './routers/stats';
+import NotFound from './routers/404';
 
 export const ROUTER_INFO = [
   {
-    path: '',
-    component: Home,
+    path: '/',
+    component: ELEGANT,
+    title: 'ELEGANT',
+    exact: true
+  },
+  {
+    path: '/download',
+    component: Download,
+    title: 'Download'
+  },
+  {
+    path: '/stats',
+    component: Stats,
+    title: 'Stats'
+  },
+  {
+    path: '/docs',
+    component: Docs,
+    title: 'Docs'
+  },
+  {
+    component: NotFound
   }
 ];
 
 const router = ({ history }) => (
   <Router history={history}>
-    <Route path="/">
-      <Layout />
-    </Route>
+    <Layout />
   </Router>
 );
 

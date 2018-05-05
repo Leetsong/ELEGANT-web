@@ -1,7 +1,10 @@
+const fs = require('fs');
 const path = require('path');
 const DefinePlugin = require('webpack').DefinePlugin;
 const merge = require('webpack-merge');
+
 const common = require('./webpack.common.js');
+const project = require('./project.config.js');
 
 // plugins
 const definePlugin = new DefinePlugin({
@@ -13,7 +16,7 @@ const devServer = {
   // open: true,
   port: 8080,
   compress: true,
-  contentBase: path.resolve(__dirname, 'dist'),
+  contentBase: project.distDir
 };
 
 module.exports = merge(common, {
@@ -37,11 +40,19 @@ module.exports = merge(common, {
         ]
       },
       { // disable css module for node_modules (especially antd)
-        test: /\.css$/,
+        test: /\.less$/,
         include: /node_modules/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader',
+          {
+            loader: "less-loader",
+            options: {
+              // set javascriptEnabled when using less@3.x
+              javascriptEnabled: true,
+              modifyVars: project.theme
+            }
+          }
         ]
       }
     ],

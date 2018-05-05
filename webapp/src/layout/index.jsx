@@ -1,35 +1,65 @@
 import React from 'react';
-import { Route, Switch } from 'dva/router';
+import { connect } from 'dva';
+import { Route, Switch, Link } from 'react-router-dom';
 import {
-  Menu
+  Layout as AntdLayout
 } from 'antd';
-import { ROUTER_INFO } from '../router';
 
-const SubMenu = Menu.SubMenu;
+import { ROUTER_INFO } from 'src/router';
+import Logo from './components/logo';
+import Menu from './components/menu';
+
+import styles from './index.less';
+
+const {
+  Header,
+  Content,
+  Footer
+} = AntdLayout;
 
 class Layout extends React.Component {
-  state = {
-    ok: 1
-  };
+
+  menu = ROUTER_INFO
+    .filter(r => r.path && r.path !== '/')
+    .map(r => {
+      return {
+        to: r.path,
+        title: r.title
+      };
+    });
 
   render() {
+    const { current } = this.props.menu;
+
     return (
-      <div>
-        <Menu mode="horizontal">
-          <Menu.Item>菜单项</Menu.Item>
-          <SubMenu title="子菜单">
-            <Menu.Item>子菜单项</Menu.Item>
-          </SubMenu>
-        </Menu>
-        <h1>ELEGANT {this.state.ok }</h1>
-        <Switch>
-        { ROUTER_INFO.map((r, i) => (
-            <Route key={i} path={r.path} component={r.component} />
-        )) }
-        </Switch>
-      </div>
+      <AntdLayout className={styles.layout}>
+        <Header className={styles.header}>
+          <Link to={ROUTER_INFO[0].path}>
+            <Logo style={{
+              margin: '16px 24px 16px 0',
+              float: 'left'
+            }} />
+          </Link>
+          <Menu
+            menu={this.menu}
+            current={{to: current.pathname}}
+          />
+        </Header>
+        <Content className={styles.content}>
+          <Switch>
+            { ROUTER_INFO.map((r, i) => (
+              <Route exact={r.exact} key={i} path={r.path} component={r.component} />
+            )) }
+          </Switch>
+        </Content>
+        <Footer className={styles.footer}>
+          ELEGANT ©2018 Created by Simon Lee
+        </Footer>
+      </AntdLayout>
     );
   }
 }
 
-export default Layout;
+export default connect(({ menu }) => {
+  return { menu };
+})(Layout);
