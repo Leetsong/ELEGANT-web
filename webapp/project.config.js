@@ -11,7 +11,10 @@ const app = {
 const rootDir = __dirname;
 
 // files
-const entry = path.resolve(__dirname, 'src', 'index.js');
+const entry = [
+  path.resolve(__dirname, 'src', 'index.js'),
+  'babel-polyfill'
+];
 const srcHtml = path.resolve(__dirname, 'index.html');
 const dist = 'bundle.js';
 const distCssAntd = 'antd.css';

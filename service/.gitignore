@@ -1,0 +1,7 @@
+sootOutput
+dist
+android-platforms
+node_modules
+.DS_Store
+dbs
+public

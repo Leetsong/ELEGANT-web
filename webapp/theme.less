@@ -1,1 +1,25 @@
 @primary-color: #f45e54;
+@primary-dark-color: #001529;
+
+body {
+  min-width: 720px;
+  background-color: rgb(240, 242, 245);
+}
+
+strong {
+  font-weight: 500;
+  color: @primary-color;
+}
+
+:not(pre) > code {
+  background-color: lighten(@primary-dark-color, 80%);
+  color: @primary-color;
+  padding: 0.1em 0.25em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+u {
+  text-decoration: none;
+  border-bottom: 1px solid @primary-color;
+}

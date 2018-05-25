@@ -45,7 +45,7 @@ module.exports = merge(common, {
         })
       },
       { // disable css module for node_modules (especially antd)
-        test: /\.less$/,
+        test: /\.(css|less)$/,
         include: /node_modules/,
         use: antdExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',

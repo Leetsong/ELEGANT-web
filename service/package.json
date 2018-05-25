@@ -1,9 +1,48 @@
 {
+  "private": true,
+  "scripts": {
+    "dev": "./node_modules/.bin/better-npm-run dev",
+    "build": "./node_modules/.bin/better-npm-run build",
+    "clean": "./node_modules/.bin/better-npm-run clean",
+    "compile": "./node_modules/.bin/better-npm-run compile",
+    "deploy": "./node_modules/.bin/better-npm-run deploy"
+  },
+  "betterScripts": {
+    "clean": {
+      "command": "rm -f $(find dist -name \"*.class\")"
+    },
+    "compile": {
+      "command": "javac $(find src/java -name \"*.java\") -classpath ./lib/ELEGANT.jar -d dist"
+    },
+    "dev": {
+      "command": "npm run clean && npm run compile && ./node_modules/.bin/nodemon ./index.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build": {
+      "command": "npm run clean & npm run compile",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "deploy": {
+      "command": "npm run build && node ./index.js"
+    }
+  },
   "devDependencies": {
-    "babel-register": "^6.26.0"
+    "nodemon": "^1.17.4"
   },
   "dependencies": {
+    "better-npm-run": "^0.1.0",
     "java": "^0.9.1",
-    "koa": "^2.5.0"
+    "koa": "^2.5.0",
+    "koa-body": "^2.5.0",
+    "koa-compose": "^4.0.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "tiny-worker": "^2.1.2",
+    "uuid": "^3.2.1"
   }
 }

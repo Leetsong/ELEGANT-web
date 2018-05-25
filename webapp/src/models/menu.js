@@ -6,7 +6,7 @@ export default {
     }
   },
   reducers: {
-    'set-current' (state, { payload: { pathname, query } }) {
+    'set-current'(state, { payload: { pathname, query } }) {
       return {
         ...state,
         current: {
@@ -18,7 +18,7 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({pathname, query}) => {
+      return history.listen(({ pathname, query }) => {
         dispatch({
           type: 'set-current',
           payload: {

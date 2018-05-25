@@ -1,3 +1,6 @@
 import React from 'react';
 
-export default () => <h3>Docs</h3>;
+import Markdown from 'components/markdown';
+import docs from 'assets/ELEGANT-docs.md';
+
+export default () => <Markdown src={docs} type="html" />;

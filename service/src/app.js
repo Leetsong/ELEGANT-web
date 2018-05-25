@@ -1,12 +1,25 @@
-require('../.settings.js');
-
 const Koa = require('koa');
+const compose = require('koa-compose');
+const body = require('koa-body');
+const serve = require('koa-static');
+const logger = require('koa-logger');
+
 const app = new Koa();
+const router = require('./routers');
+const on404 = require('./routers/404');
+const onError = require('./onerror');
+const resources = require('../resources');
 
-app.use(async ctx => {
-  ctx.body = 'Hello, world';
-});
+app.use(compose([
+  logger(),
+  body({
+    multipart: true
+  }),
+  on404,
+  onError,
+  serve(resources.publicDir),
+  router.routes(),
+  router.allowedMethods()
+]));
 
-app.listen(3000, '127.0.0.1', null, () => {
-  console.log('started');
-});
+module.exports = app;

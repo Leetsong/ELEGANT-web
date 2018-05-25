@@ -2,12 +2,15 @@ import React from 'react';
 import { connect } from 'dva';
 import { Route, Switch, Link } from 'react-router-dom';
 import {
-  Layout as AntdLayout
+  Layout as AntdLayout,
+  Icon
 } from 'antd';
 
 import { ROUTER_INFO } from 'src/router';
-import Logo from './components/logo';
-import Menu from './components/menu';
+import Logo from './logo';
+import Banner from './banner';
+import Menu from './menu';
+import { APP } from 'src/elegant.config';
 
 import styles from './index.less';
 
@@ -20,7 +23,9 @@ const {
 class Layout extends React.Component {
 
   menu = ROUTER_INFO
-    .filter(r => r.path && r.path !== '/')
+    .filter(r => r.isMenu 
+              && r.path 
+              && r.path !== ROUTER_INFO[ROUTER_INFO.homeIdx].path)
     .map(r => {
       return {
         to: r.path,
@@ -45,6 +50,20 @@ class Layout extends React.Component {
             current={{to: current.pathname}}
           />
         </Header>
+        <Banner 
+          style={{ display: current.pathname === ROUTER_INFO[ROUTER_INFO.homeIdx].path 
+            ? 'block' : 'none' 
+          }}
+        >
+          <div className={styles.bannerContent}>
+            <h1 className={styles.title}>{ APP.name }</h1>
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html: APP.richDescription }}/>
+            <div className={styles.operations}>
+              <Link className={styles.tryItOut} to={ROUTER_INFO[ROUTER_INFO.tryItOutIdx].path}>Try it out!</Link>
+              <Link className={styles.goToDocs} to={ROUTER_INFO[ROUTER_INFO.docsIdx].path}>Go to docs <Icon type="right"/></Link>
+            </div>
+          </div>
+        </Banner>
         <Content className={styles.content}>
           <Switch>
             { ROUTER_INFO.map((r, i) => (
@@ -53,7 +72,7 @@ class Layout extends React.Component {
           </Switch>
         </Content>
         <Footer className={styles.footer}>
-          ELEGANT ©2018 Created by Simon Lee
+          { APP.name } <Icon type="copyright" /> 2018 Created by <a href={APP.author.index}>{APP.author.name}</a>
         </Footer>
       </AntdLayout>
     );

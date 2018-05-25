@@ -16,7 +16,13 @@ const devServer = {
   // open: true,
   port: 8080,
   compress: true,
-  contentBase: project.distDir
+  contentBase: project.distDir,
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3000',
+      changeOrigin: true
+    }
+  }
 };
 
 module.exports = merge(common, {
@@ -40,7 +46,7 @@ module.exports = merge(common, {
         ]
       },
       { // disable css module for node_modules (especially antd)
-        test: /\.less$/,
+        test: /\.(css|less)$/,
         include: /node_modules/,
         use: [
           'style-loader',
@@ -55,7 +61,7 @@ module.exports = merge(common, {
           }
         ]
       }
-    ],
+    ]
   },
   plugins: [
     definePlugin
