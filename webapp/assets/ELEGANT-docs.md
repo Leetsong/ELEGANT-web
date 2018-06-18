@@ -2,11 +2,11 @@
 
 ## Introduction
 
-ELEGANT, is a tool used to locate fragmentation induced compatibility issues.
+ELEGANT, is a tool to effectively locate fragmentation-induced compatibility issues.
 
 ### FIC Issues
 
-FIC is short for <u>f</u>ragmentation <u>i</u>nduced <u>c</u>ompatibility issues [1] the Android ecosystem is severely suffering from. In the Android ecosystem, various devices bounded with different device models (Google Pixel, Samsung Galaxy, etc.) and operating system versions (Lollipop, etc.) arises every day. The developers of these models/versions sometimes change the behavior of some apis, making them different with the behavior described in the official documents, with or without notifying developers of these changes. In result, apps developed using these apis will behave differently in different devices (good on one, but crash on another). And a developer cannot exhaustively test all the various devices due to the numerous combinations of the models and versions.
+FIC is short for <u>f</u>ragmentation-<u>i</u>nduced <u>c</u>ompatibility issues [1] the Android ecosystem is severely suffering from. In the Android ecosystem, various devices bounded with different device models (Google Pixel, Samsung Galaxy, etc.) and operating system versions (Lollipop, etc.) arises every day. The developers of these models/versions sometimes change the behavior of some apis, making them different with the behavior described in the official documents, with or without notifying developers of these changes. In result, apps developed using these apis will behave differently in different devices (good on one, but crash on another). And a developer cannot exhaustively test all the various devices due to the numerous combinations of the models and versions.
 
 ### API-Context Pair Model
 

@@ -5,9 +5,9 @@ import React from 'react';
 //
 export const APP = {
   name: 'ELEGANT',
-  description: `a tool used to locate fragmentation induced compatibility issues`,
-  richDescription: `a tool us<u>e</u>d to <u>l</u>ocat<u>e</u> 
-    fra<u>g</u>ment<u>a</u>tion i<u>n</u>duced compa<u>t</u>ibility issues`,
+  description: `a tool used to locate fragmentation-induced compatibility issues`,
+  richDescription: `a tool to <u>e</u>ffectively <u>l</u>ocat<u>e</u> 
+    fra<u>g</u>ment<u>a</u>tion-i<u>n</u>duced compa<u>t</u>ibility issues`,
   author: {
     name: 'Simon Lee',
     index: 'https://github.com/Leetsong',
